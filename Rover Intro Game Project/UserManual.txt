@@ -1,0 +1,23 @@
+ROVER GAME USER MANUAL 
+By Noah Hendlish and Will Crum
+
+Instructions:
+
+This manual describes how to operate the Lost Rovers game. 
+Run the
+Once the GUI loads, you should be able to see a small flea-like icon amongst cabbage, nails, gears, cakes, portals, 
+and broken ship parts. This flea-like critter is your rover, and will be what you are controlling in this game. 
+
+To move, use your arrow keys or the keys located on the window. 
+
+The space bar picks up items, or you may use the “Pick up” button on the window. 
+
+The bulls-eye icon on the screen are portals, and once you pass over one you will be teleported to another room. 
+
+If you become lost amongst the rooms, the “Show the way back” button will highlight which portal you should take 
+to have the quickest route back to your ship. 
+
+The task at hand should be visible at the top of the screen, and once you have collected all of the required items,
+move your rover over the part to be fixed and press the “Perform Task” button. 
+
+Once all tasks have been completed, you win and your rover can return home!

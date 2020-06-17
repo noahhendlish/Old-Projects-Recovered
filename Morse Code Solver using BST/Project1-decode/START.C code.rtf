@@ -1,0 +1,140 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504
+{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;\csgray\c100000;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 /*\
+ * start.c\
+ *\
+ *  Created on: Apr 18, 2017\
+ *     Author: noahhendlish\
+ */\
+#include <stdio.h>\
+#include <stdlib.h>\
+FILE *code;\
+\
+struct code\{\
+	char chr; 		//character\
+	char* morse; 	//its Morse Encoding\
+\};\
+\
+int countChar(char *filename)\{ //counts number of characters in a text file\
+	FILE* input = fopen(filename, "rb");\
+	int charCount = 0;\
+	int charTrack;\
+	if (input == NULL) \{\
+	       return -1;\
+	\}\
+	charTrack = fgetc(input);\
+	while(charTrack != EOF)\{\
+		charCount++;\
+		charTrack = fgetc(input);\
+	\}\
+	fclose(input);\
+	return charCount;\
+	\}\
+char* inputArray(char* inputFile)\{\
+	FILE* input = fopen(inputFile, "rb");		//open file for writing\
+	int size = countChar(inputFile);\
+	char *userChars = (char *) malloc(size+2);	// CHANGE TO malloc (8) memory allocation\
+	int charTrack;								//track current char in fgetc()\
+\
+	if (input == NULL)\{\
+       return NULL; 							//if file doesn't exist return NULL\
+	\}\
+	int count = 0;\
+	charTrack = fgetc(input);\
+	while (charTrack != EOF)\{\
+		userChars[count++] = (char) charTrack;\
+        charTrack = fgetc(input);\
+\
+   \}\
+	userChars[count] = '\\0';					// end with null character?\
+	fclose(input);\
+   return userChars;\
+\}\
+\
+void duplicateLine(char* filein, char* fileout)\{\
+	char* txtin = inputArray(filein);\
+	FILE* output = fopen(fileout, "w");\
+	char c;\
+	int txtTrack;\
+	for(int i = 0; i < strlen(txtin); i++)\{\
+		c = txtin[i];\
+		txtTrack = fputc(c, output);\
+		txtTrack = fputc(c, output);\
+	\}\
+	fclose(output);\
+\}\
+\
+struct code* seperate(char* filename)\{\
+	   char* txt = inputArray(filename);\
+	   int lines = countLines(filename);\
+	   struct code encode[lines];\
+	   //struct code* encode;\
+	   //encode = malloc(lines+2);\
+	   const char s[5] = " \\n\\r";\
+	   char c;\
+	   char* token1;\
+	   token1 = strtok(txt, s);\
+	   int x = 0;\
+	   while( token1 != NULL )\{\
+		  c = token1[0];\
+	      encode[x].chr = c; 	// or malloc and strcpy\
+		  token1 = strtok(NULL, s);\
+	      encode[x].morse = token1;\
+		  token1 = strtok(NULL, s);\
+	      x++;\
+	   \}\
+	   printf("chr: %c \\nmorse: %s\\n", encode[10].chr, encode[10].morse);\
+	   return encode;\
+\}\
+\
+int main(void) \{\
+	//strncpy(morse, line+2, 10);\
+	struct code* encode;\
+	encode = seperate("code.txt.txt");\
+	int i = countChar("input.txt");\
+	printf("input # characters: %d\\n", i);\
+	int line = countLines("input.txt");\
+	printf("lines #: %d\\n", line);\
+	char* input = inputArray("input.txt");\
+	printf("input characters:\\n%s\\n", input);\
+	duplicateLine("input.txt", "output.txt");\
+	char* outarray = inputArray("output.txt");\
+	printf("duplicate characters:\\n%s\\n", outarray);\
+	printf("\\n\\nSEPERATE:\\n\\n");\
+\
+	printf("chr: %c \\nmorse: %s\\n", encode[3].chr, encode[3].morse);\
+	//printf("wait line %i\\n", __LINE__);\
+	return EXIT_SUCCESS;\
+\}\
+\
+int countLines(char *filename)\{ //counts number of characters in a text file\
+	int lineCount = 0;\
+	code = fopen(filename, "r");\
+		if (code == NULL) \{\
+	       printf("Cannot open %s\\n", filename);\
+	       exit(1);\
+		\}\
+	int charTrack;\
+	charTrack = fgetc(code);\
+	if(charTrack)\{\
+			lineCount = 1;\
+		\}\
+	else\{\
+		return -1;\
+	\}\
+	while(charTrack != EOF)\{\
+		if(charTrack == '\\n')\{\
+					 lineCount++;\
+				 	 \}\
+		charTrack = fgetc(code);\
+		\}\
+	fclose(code);\
+	return lineCount;\
+	\}\
+\
+}

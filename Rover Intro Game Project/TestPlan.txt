@@ -1,0 +1,49 @@
+TestPlan
+
+
+TaskQueue-
+Make sure that the run time is linear by testing how long it takes to run with different inputs
+Items and the Item class-
+-AddItem - JUnit tests to ensure whether the item appears on the interface correctly
+Inventory Class-
+-Make the inventory class alphabetically sorted so when items are picked up, it can be tracked easier
+-InventoryToString method needs a JUnit test to ensure the items and their names are correctly oriented
+-Test to make sure the items become visible in inventory when picked up
+-Test all possible combinations of picking up items for the ship parts to make sure they are possible to hold in inventory
+Parts class-
+-The catch function for IOExceptionâ€™s partImg can be traced and thus should be tested to make sure the correct image is being called null
+-The overridden BufferedImage method only has one return statement, but can be tested
+Ship class-
+-Use the assertTrue([message,] boolean condition) to test the isBroken boolean function for the ship
+-Use the assertTrue([message,] boolean condition) to test the Ship fixed method
+-Using @Test (expected = Exception.class) to test methods to throw the correctly named exception
+-Using assertNull([message,] object) in order to check applicable null objects are null when called correctly
+-Test the overriden String toString function to make sure the partType returned is what is expected
+Portal class-
+-Since the Portal class extends the Item class, the JUnit test for assertNull and assertNotNull can be used to check objects that should be null or not have the desired values
+-assertSame([message,] expected, actual) can be used to check variables that should refer to the same object do
+-Overriden BufferedImage getImage() method has a try function that should be tested in order to make sure the portal.jpg file is returned at appropriate times
+-Overriden BufferedImage also uses a catch function that has a null return that can be tested
+-String getItemImg method needs to be tested for its null return as well
+Rover class-
+-Automated functions cannot be tested, e.g. goDown and goUp functions
+-Feed false parameters to appropriate methods to test how the functions operate
+-String getInventory method needs to call the inventory class correctly and function to where the inventory is functioning and visible
+-GetTask method will hopefully be functionable when we fix our Task class
+-Point getLocation is called by the GuiPanel and should return the correct current position of the rover
+General tests-
+-Hopefully we will be able to test when the rover hits a wall and is asked to move through it that it does not disappear off of the side of the interface (GUI testing)
+-Testing the stack for the portal to make sure that the positions that the portal spawn in different places every time
+-Testing the Tasks class to make sure all functioning calls to it are working and that the tasks are always different for different parts
+Room class-
+-Test the boolean return methods isPortal(Point location) and isPortal(int x, int y) with the assertTrue([message,] boolean condition) JUnit test
+-Make sure the implementation of IRoom is functioning correctly
+-Method Room() uses the Math class and should be tested for its random number calls
+-Although we currently have a means for implementing where portals spawn, we will make it random in our final submission
+-addItem method can be tested for its Math.random function
+-addItem method should be tested for its grid functionality in producing new parts
+-isOccupied method returns a boolean value and can be checked using a JUnit test
+-testing the removeItem method of the Room class for both isOccupied and its subsequent return value can be tested with JUnit
+-The isLiftable method returns a boolean value and can be tested with assertTrue([message,] boolean condition), along with the isShip and isPortal methods
+-generateTask function should be tested for its call to the Task class
+-getItem can be tested for its return value and its Point functionality
